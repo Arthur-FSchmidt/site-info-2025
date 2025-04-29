@@ -1,7 +1,7 @@
 *{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-img {
+#logo {
     max-height: 70px;
 }
 nav {
@@ -31,9 +31,13 @@ nav {
 .maxw-520 {
     max-width: 520px;
   }
-.minh-200 {
-    min-height: 200px;
+.minh-240 {
+    min-height: 240px;
 }
 .btn {
     width: 125px;
+}
+.card {
+    border: 0px;
+    box-shadow: 2px 2px 15px #aaa;
 }
