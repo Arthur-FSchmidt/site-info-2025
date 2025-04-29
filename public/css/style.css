@@ -1,3 +1,39 @@
 *{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+img {
+    max-height: 70px;
+}
+nav {
+    background-color: #000518;
+}
+#cards div {
+    max-width: 520px;
+    height: 300px;
+}
+#sobre {
+    background-color: #08164E;
+}
+.footer {
+    width: 100vw;
+}
+#apoio {
+    background-color: #08164E;
+}
+#footer {
+    background-color: #000518;
+}
+#apoiador {
+    height: 170px;
+    width: 170px;
+    background-color: gray;
+}
+.maxw-520 {
+    max-width: 520px;
+  }
+.minh-200 {
+    min-height: 200px;
+}
+.btn {
+    width: 125px;
+}

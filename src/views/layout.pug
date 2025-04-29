@@ -1,0 +1,14 @@
+doctype html
+html
+    head
+        link(rel="stylesheet" href="/icons/bootstrap-icons.css")
+        link(href="/css/bootstrap.min.css" rel="stylesheet")
+        link(rel="stylesheet", href="css/style.css")
+        title= title
+        block styles
+    body
+        include includes/header
+        block content
+        include includes/footer
+        script(src="/js/bootstrap.min.js") 
+        
