@@ -8,7 +8,7 @@ block content
                 p.card-text.m-3.text-white Os sistemas informatizados estão cada vez mais presentes no cotidiano da sociedade. O cenário atual caracteriza-se pela informática difundindo-se em todos os setores, estando presente no comércio, indústria, área financeira, saúde, ensino e, principalmente, na vida privada das pessoas, através das redes sociais.
                 p.card-textm.m-3.text-white O Técnico em Informática é responsável pelo planejamento e execução dos processos de manutenção e operação de redes locais de computadores. Desenvolve aplicativos computacionais, adotando normas técnicas de qualidade, saúde, segurança do trabalho e de preservação ambiental no desempenho de sua função. Trabalha em equipe, estabelece relações interpessoais construtivas e compreende o contexto em que está inserido, demonstrando capacidade propositiva e criativa.
     .container.mb-3.py-2
-        .row.row-cols-1.row-cols-md-2.g-4.justify-content-center
+        .row.row-cols-1.row-cols-md-2.g-4.justify-content-around
             - var cards = [{titulo:"Semana da Informática", corpo:"Semana da Informática, é um evento que busca trazer conhecimento aos alunos do Curso Técnico em Informática, a respeito de carreira, mercado de trabalho e experiências."}, {titulo:"Currículo", corpo:"Conheça a grade curricular do curso."}, {titulo:"Feiras", corpo:"Participação de alunos do curso em feiras de tecnologia."}, {titulo:"Professores", corpo:"Conheça os professores do curso."}, {titulo:"Podcast", corpo:"Conheça o podcast do curso."}]
             each card in cards
                 .col.maxw-520
@@ -16,7 +16,7 @@ block content
                         .card-body.d-grid.align-content-between
                             h3.card-title.fw-bold.m-3= card.titulo
                             p.card-text.m-3= card.corpo
-                            button.btn.btn-secondary
+                            button.btn.btn-secondary.m-3
                                 i.bi.bi-arrow-right-short 
                                 .
                                     Saiba Mais
