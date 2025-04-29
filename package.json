@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
     "start": "node index.js"
   },
   "repository": {
@@ -16,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/Arthur-FSchmidt/site-info-2025/issues"
   },
-  "homepage": "https://github.com/Arthur-FSchmidt/site-info-2025#readme"
+  "homepage": "https://github.com/Arthur-FSchmidt/site-info-2025#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pug": "^3.0.3"
+  }
 }
