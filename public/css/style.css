@@ -1,6 +1,3 @@
-*{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
 #logo {
     height: 70px;
 }
@@ -18,9 +15,6 @@
 .maxw-520 {
     max-width: 520px;
   }
-.minh-240 {
-    min-height: 240px;
-}
 .btn {
     width: 125px;
 }
