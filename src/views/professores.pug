@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    - var professores = [{nome:"Cândido Luciano Farias", sobre:"Professor", foto:"media/Candido.jpeg"}, {nome:"Diego Cândido de Souza", sobre:"Professor", foto:"media/Diego.jpeg"}, {nome:"Thiago Ulrich Beneditto", sobre:"Professor", foto:"media/Thiago.jpeg"}, {nome:"Helder Palharini de Mattos", sobre:"Professor", foto:"media/Helder.jpg"}, {nome:"Erai de Souza Junior", sobre:"Professor", foto:"media/Erai.jpeg"}, {nome:"Rodrigo Henrich", sobre:"Professor", foto:"media/Rodrigo.jpg"}]
+    .container-fluid
+        .row.justify-content-center.m-3
+            .col.col-md-10.col-lg-10
+                h1 Professores
+        .row.row-cols-auto.g-4.justify-content-center.m-3
+            each prof in professores
+                .col.maxw-300
+                    .card.h-100.border-0.shadow.rounded-4
+                        .card-body
+                            img(src=prof.foto).card-img-top.rounded-2
+                            h5.card-title.m-3= prof.nome
+                            p.card-text.m-3= prof.sobre
+

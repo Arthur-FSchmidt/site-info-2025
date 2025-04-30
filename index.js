@@ -24,8 +24,16 @@ app.get('/sobre', (req, res) => {
   res.render('sobre', {title:"Informática"});
 });
 
+app.get('/curriculo', (req, res) => {
+  res.render('curriculo', {title:"Informática"});
+});
+
 app.get('/feiras', (req, res) => {
   res.render('feiras', {title:"Informática"});
+});
+
+app.get('/professores', (req, res) => {
+  res.render('professores', {title:"Informática"});
 });
 
 app.get('/podcast', (req, res) => {

@@ -7,14 +7,17 @@
 .color-info {
     background-color: #08164E;
 }
-#apoiador {
+.apoiador {
     height: 170px;
     width: 170px;
     background-color: gray;
 }
+.btn {
+    width: 135px;
+}
 .maxw-520 {
     max-width: 520px;
   }
-.btn {
-    width: 125px;
+.maxw-300 {
+    max-width: 300px;
 }
