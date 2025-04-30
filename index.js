@@ -20,6 +20,18 @@ app.get('/', (req, res) => {
   res.render('index', {title:"Informática"});
 });
 
+app.get('/sobre', (req, res) => {
+  res.render('sobre', {title:"Informática"});
+});
+
+app.get('/feiras', (req, res) => {
+  res.render('feiras', {title:"Informática"});
+});
+
+app.get('/podcast', (req, res) => {
+  res.render('podcast', {title:"Informática"});
+});
+
 app.use((req, res, next) => {
     res.render('404', {title:"Informática"});
   });
