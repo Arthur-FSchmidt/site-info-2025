@@ -1,7 +1,146 @@
 extends layout 
 
 block content 
-    .container-fluid
-        .row.justify-content-center
-            .col.col-md-10.col-lg-6
-                h1 Curriculo
+    .container-fluid.py-3
+        .row.justify-content-center.m-3
+            .col.col-md-10.col-lg-10
+                h1 Currículo
+        .row.justify-content-center.m-3
+            .col.col-md-10.m-md-3
+                - let diurno_formacao_geral = [{disciplina:"Filosofia", ano1:"1", ano2:"1", ano3:"1", ha:"120", hr:"100h"},{disciplina:"Geografia", ano1:"2", ano2:"1", ano3:"-", ha:"120", hr:"100h"}, {disciplina:"História", ano1:"2", ano2:"-", ano3:"2", ha:"160", hr:"134h"}, {disciplina:"Sociologia", ano1:"1", ano2:"1", ano3:"1", ha:"120", hr:"100h"}, {disciplina:"Biologia", ano1:"2", ano2:"2", ano3:"2", ha:"240", hr:"200h"}, {disciplina:"Física", ano1:"2", ano2:"2", ano3:"2", ha:"240", hr:"200h"}, {disciplina:"Química", ano1:"2", ano2:"2", ano3:"2", ha:"240", hr:"200h"}, {disciplina:"Arte", ano1:"2", ano2:"-", ano3:"-", ha:"80", hr:"67h"}, {disciplina:"Educação física", ano1:"1", ano2:"1", ano3:"1", ha:"120", hr:"100h"}, {disciplina:"Literatura", ano1:"1", ano2:"2", ano3:"2", ha:"200", hr:"166h"}, {disciplina:"Língua portuguesa", ano1:"4", ano2:"4", ano3:"3", ha:"440", hr:"366h"}, {disciplina:"Matemática", ano1:"4", ano2:"4", ano3:"3", ha:"440", hr:"366h"}, {disciplina:"Língua Espanhola", ano1:"1", ano2:"1", ano3:"-", ha:"80", hr:"67h"}, {disciplina:"Língua Inglesa", ano1:"2", ano2:"2", ano3:"2", ha:"240", hr:"200h"}, {disciplina:"Ensino Religioso", ano1:"1", ano2:"-", ano3:"-", ha:"40", hr:"34h"}]
+                - let diurno_formacao_profissional = [{disciplina: "Modelagem e Projeto de Banco de Dados", ano1: "-", ano2: "-", ano3: "4", ha: "160", hr: "134h"}, {disciplina: "Criação de Sites", ano1: "-", ano2: "3", ano3: "3", ha: "240", hr: "200h"}, {disciplina: "Design Grafico", ano1: "-", ano2: "2", ano3: "3", ha: "200", hr: "166h"}, {disciplina: "Manutenção de Microcomputadores", ano1: "-", ano2: "2", ano3: "-", ha: "80", hr: "67h"}, {disciplina: "Programação", ano1: "-", ano2: "4", ano3: "4", ha: "230", hr: "266h"}, {disciplina: "Redes de Computadores", ano1: "-", ano2: "-", ano3: "2", ha: "80", hr: "67h"}, {disciplina: "Sistemas Operacionais", ano1: "-", ano2: "3", ano3: "-", ha: "120", hr: "100h"}, {disciplina: "Ética", ano1: "-", ano2: "1", ano3: "-", ha: "40", hr: "33h"}, {disciplina: "Empreendedorismo", ano1: "-", ano2: "-", ano3: "1", ha: "40", hr: "33h"}, {disciplina: "Projeto de Pesquisa", ano1: "2", ano2: "2", ano3: "2", ha: "240", hr: "200h"}]
+                - let noturno = [{disciplina:"Programação I", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Projetos I", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Design Gráfico", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Sistemas Operacionais I", periodos_semanais:"2p", periodos_totais:"40p", semestral:"32 horas"}, {disciplina:"Ética", periodos_semanais:"3p", periodos_totais:"60p", semestral:"48 horas"}, {disciplina:"Criação de sites I", periodos_semanais:"3p", periodos_totais:"60p", semestral:"48 horas"}, {disciplina:"Segurança da informação", periodos_semanais:"2p", periodos_totais:"40p", semestral:"32 horas"}, {disciplina:"Programação II", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Projetos II", periodos_semanais:"3p", periodos_totais:"60p", semestral:"48 horas"}, {disciplina:"Sistemas Operacionais II", periodos_semanais:"2p", periodos_totais:"40p", semestral:"32 horas"}, {disciplina:"Criação de sites II", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Redes de computadores I", periodos_semanais:"2p", periodos_totais:"40p", semestral:"32 horas"}, {disciplina:"Manutenção de computadores", periodos_semanais:"3p", periodos_totais:"60p", semestral:"48 horas"}, {disciplina:"Banco de dados", periodos_semanais:"2p", periodos_totais:"40p", semestral:"32 horas"}, {disciplina:"Modelagem de dados", periodos_semanais:"3p", periodos_totais:"60p", semestral:"48 horas"}, {disciplina:"Programação III", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Projetos III", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Design Gráfico II", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}, {disciplina:"Redes de computadores II", periodos_semanais:"2p", periodos_totais:"40p", semestral:"32 horas"}, {disciplina:"Empreendedorismo", periodos_semanais:"3p", periodos_totais:"60p", semestral:"48 horas"}, {disciplina:"Criação de sites III", periodos_semanais:"5p", periodos_totais:"100p", semestral:"80 horas"}]
+                - let primeiro = true
+                - let row = 1
+                p Currículo do curso de Informática, com a organização das disciplinas, competências desenvolvidas e a trajetória formativa que prepara o aluno para os desafios do mercado de tecnologia.
+                div.justify-content-center.mb-1
+                    ul(role="tablist").nav.nav-tabs
+                        li(role="presentation").nav-item
+                            a(id="diurno-tab" data-bs-toggle="tab" data-bs-target="#diurno" type="button" role="tab" aria-controls="diurno" aria-selected="true").nav-link.active Diurno
+                        li(role="presentation").nav-item
+                            a(id="noturno-tab" data-bs-toggle="tab" data-bs-target="#noturno" type="button" role="tab" aria-controls="noturno" aria-selected="false").nav-link Noturno    
+                .table-responsive.tab-content
+                    table(role="tabpanel" aria-labelledby="diurno" tabindex="0")#diurno.tab-pane.fade.show.active.table.table-bordered.align-middle
+                        thead 
+                            tr
+                                th(scope="col", colspan="2", rowspan="2") Área do conhecimento
+                                th(scope="col", rowspan="2") Componente curricular
+                                th(scope="col", colspan="3") Carga horária - h/a Semanal/ano
+                                th(scope="col", rowspan="2") CH h/a
+                                th(scope="col", rowspan="2") CH h/r
+                            tr
+                                th(scope="col") 1º Ano
+                                th(scope="col") 2º Ano
+                                th(scope="col") 3º Ano
+                        tbody
+                            each item in diurno_formacao_geral
+                                tr  
+                                    case row
+                                        when 1
+                                            th(scope="row", rowspan="12").vertical-text.text-center Formação Geral
+                                            th(scope="row", rowspan="4") Ciências Humanas 
+                                            - row = row + 1
+                                        when 5
+                                            th(scope="row", rowspan="3") Ciências da Natureza
+                                            - row = row + 1
+                                        when 8
+                                            th(scope="row", rowspan="4") Linguagens
+                                            - row = row + 1
+                                        when 12
+                                            th(scope="row", rowspan="1") Matemática
+                                            - row = row + 1
+                                        when 13
+                                            th(scope="row", rowspan="3", colspan="2") Parte Diversificada
+                                            - row = row + 1
+                                        default 
+                                            - row = row + 1
+                                    td= item.disciplina
+                                    td.text-center= item.ano1
+                                    td.text-center= item.ano2
+                                    td.text-center= item.ano3
+                                    td.text-center= item.ha
+                                    td.text-center= item.hr
+                            each item in diurno_formacao_profissional
+                                tr  
+                                    case primeiro 
+                                        when true
+                                            th(scope="row", rowspan="10", colspan="2") Formação profissional
+                                            - primeiro = false
+                                    td= item.disciplina
+                                    td.text-center= item.ano1
+                                    td.text-center= item.ano2
+                                    td.text-center= item.ano3
+                                    td.text-center= item.ha
+                                    td.text-center= item.hr
+                        tfoot 
+                            tr 
+                                th(scope="row", colspan="2", rowspan="4")
+                                td 
+                                td.text-center 30
+                                td.text-center 40
+                                td.text-center 40
+                                td(colspan="2") 
+                            tr
+                                th Subtotal
+                                td.text-center 1200
+                                td.text-center 1600
+                                td.text-center 1600
+                                td.text-center 4400h
+                                td.text-center 3666h
+                            tr 
+                                th Estágio
+                                td(colspan="4")
+                                td.text-center 400h
+                            tr 
+                                th Total Geral
+                                td(colspan="4")
+                                td.text-center 4066h 
+                    table(role="tabpanel" aria-labelledby="noturno" tabindex="0")#noturno.tab-pane.fade.table.table-bordered.text-center.align-middle
+                        thead
+                            tr
+                                th(scope="col", rowspan="2") Etapas
+                                th(scope="col", rowspan="2") Componente Curricular
+                                th(scope="col", colspan="3") Carga horária
+                            tr    
+                                th(scope="col") Períodos semanais
+                                th(scope="col") Total de períodos
+                                th(scope="col") Semestral h/r
+                        tbody 
+                            - row = 1
+                            each item in noturno 
+                                tr
+                                    case row 
+                                        when 1
+                                            th(scope="row", rowspan="7") 1ª Etapa
+                                            - row = row + 1
+                                        when 8
+                                            th(scope="row", rowspan="8") 2ª Etapa
+                                            - row = row + 1
+                                        when 16
+                                            th(scope="row", rowspan="6") 3ª Etapa
+                                            - row = row + 1
+                                        default
+                                            - row = row + 1
+                                    td.text-start= item.disciplina 
+                                    td= item.periodos_semanais 
+                                    td= item.periodos_totais 
+                                    td= item.semestral
+                        tfoot
+                            tr
+                                th(scope="row", rowspan="3")
+                                th(scope="row").text-start Subtotal
+                                td 75p
+                                td 1500p
+                                td 1200 horas
+                            tr
+                                th(scope="row").text-start Estágio Obrigatório
+                                td(colspan="2")
+                                td 400 horas
+                            tr
+                                th(scope="row").text-start Total do Curso com o Estágio
+                                td(colspan="2")
+                                td 1600 horas
+
+
+
+                        

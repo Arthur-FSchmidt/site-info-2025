@@ -14,10 +14,15 @@
 }
 .btn {
     width: 135px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 .maxw-520 {
     max-width: 520px;
   }
 .maxw-300 {
     max-width: 300px;
+}
+.vertical-text {
+    writing-mode: sideways-lr;
 }

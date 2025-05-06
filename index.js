@@ -21,27 +21,27 @@ app.get('/', (req, res) => {
 });
 
 app.get('/sobre', (req, res) => {
-  res.render('sobre', {title:"Informática"});
+  res.render('sobre', {title:"Sobre - Informática"});
 });
 
 app.get('/curriculo', (req, res) => {
-  res.render('curriculo', {title:"Informática"});
+  res.render('curriculo', {title:"Currículo - Informática"});
 });
 
 app.get('/feiras', (req, res) => {
-  res.render('feiras', {title:"Informática"});
+  res.render('feiras', {title:"Feiras - Informática"});
 });
 
 app.get('/professores', (req, res) => {
-  res.render('professores', {title:"Informática"});
+  res.render('professores', {title:"Professores - Informática"});
 });
 
 app.get('/podcast', (req, res) => {
-  res.render('podcast', {title:"Informática"});
+  res.render('podcast', {title:"Podcast - Informática"});
 });
 
 app.use((req, res, next) => {
-    res.render('404', {title:"Informática"});
+    res.render('404', {title:"Não encontrado - Informática"});
   });
 
 // Start Server
