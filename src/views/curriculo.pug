@@ -35,21 +35,15 @@ block content
                                         when 1
                                             th(scope="row", rowspan="12").vertical-text.text-center Formação Geral
                                             th(scope="row", rowspan="4") Ciências Humanas 
-                                            - row = row + 1
                                         when 5
                                             th(scope="row", rowspan="3") Ciências da Natureza
-                                            - row = row + 1
                                         when 8
                                             th(scope="row", rowspan="4") Linguagens
-                                            - row = row + 1
                                         when 12
                                             th(scope="row", rowspan="1") Matemática
-                                            - row = row + 1
                                         when 13
                                             th(scope="row", rowspan="3", colspan="2") Parte Diversificada
-                                            - row = row + 1
-                                        default 
-                                            - row = row + 1
+                                    - row = row + 1
                                     td= item.disciplina
                                     td.text-center= item.ano1
                                     td.text-center= item.ano2
@@ -62,7 +56,7 @@ block content
                                     case row
                                         when 1
                                             th(scope="row", rowspan="10", colspan="2") Formação profissional
-                                            - row = row + 1
+                                    - row = row + 1        
                                     td= item.disciplina
                                     td.text-center= item.ano1
                                     td.text-center= item.ano2
@@ -109,15 +103,11 @@ block content
                                     case row 
                                         when 1
                                             th(scope="row", rowspan="7") 1ª Etapa
-                                            - row = row + 1
                                         when 8
                                             th(scope="row", rowspan="8") 2ª Etapa
-                                            - row = row + 1
                                         when 16
                                             th(scope="row", rowspan="6") 3ª Etapa
-                                            - row = row + 1
-                                        default
-                                            - row = row + 1
+                                    - row = row + 1        
                                     td.text-start= item.disciplina 
                                     td= item.periodos_semanais 
                                     td= item.periodos_totais 
