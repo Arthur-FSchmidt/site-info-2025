@@ -4,17 +4,16 @@ block content
     - let row = 1
     .container-fluid.py-3
         .row.justify-content-center.m-3
-            .col.col-md-10.col-lg-10
+            .col.col-md-8
                 h1 Currículo
-        .row.justify-content-center.m-3
-            .col.col-md-10.m-md-3
-                p Currículo do curso de Informática, com a organização das disciplinas, competências desenvolvidas e a trajetória formativa que prepara o aluno para os desafios do mercado de tecnologia.
-            div.col.col-md-8.mb-1
+        .row.justify-content-center.m-3    
+            .col.col-md-8.mb-1
                 ul(role="tablist").nav.nav-tabs.justify-content-center
                     li(role="presentation").nav-item
                         a(id="diurno-tab" data-bs-toggle="tab" data-bs-target="#diurno" type="button" role="tab" aria-controls="diurno" aria-selected="true").nav-link.active Diurno
                     li(role="presentation").nav-item
-                        a(id="noturno-tab" data-bs-toggle="tab" data-bs-target="#noturno" type="button" role="tab" aria-controls="noturno" aria-selected="false").nav-link Noturno    
+                        a(id="noturno-tab" data-bs-toggle="tab" data-bs-target="#noturno" type="button" role="tab" aria-controls="noturno" aria-selected="false").nav-link Noturno       
+            .col-auto 
                 .table-responsive.tab-content
                     table(role="tabpanel" aria-labelledby="diurno" tabindex="0")#diurno.tab-pane.fade.show.active.table.table-bordered.align-middle
                         thead 

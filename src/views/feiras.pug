@@ -1,15 +1,16 @@
 extends layout 
 
 block content 
-    .container-fluid.py-3
+    .container.py-3
         .row.justify-content-center.m-3
             .col.col-md-8.col-lg-6
                 h1.p-1 Feiras
-                p.p-1 Acompanhe os destaques das feiras e mostras científicas em que o curso de Informática marca presença, apresentando projetos inovadores desenvolvidos por nossos alunos como resultado de muita criatividade, pesquisa e dedicação.
-        .row.row-cols-1.row-cols-md-2.justify-content-center
+                p.p-1 Acompanhe os destaques das feiras e mostras científicas em que o curso de Informática marca presença, apresentando projetos inovadores desenvolvidos por nossos alunos como resultado de muita criatividade, pesquisa e dedicação.    
+        .row.row-cols-1.row-cols-md-2.row-cols-md-3.justify-content-center.g-4
             each item in feiras
-                .card.border-0.shadow.rounded-4.col-sm-10.col-md-6.col-lg-3.col.m-3.p-0
-                    img(src=item.imagem_path, alt="").w-100.rounded-top-4.card-img-top
-                    .card-body 
-                        h1.card-title.m-3= item.nome
-                        p.card-text.m-3= item.descricao
+                .col
+                    .card.border-0.shadow.rounded-4.m-3.p-0
+                        img(src=item.imagem_path, alt="").w-100.rounded-top-4.card-img-top
+                        .card-body 
+                            h1.card-title.m-3= item.nome
+                            p.card-text.m-3= item.descricao
