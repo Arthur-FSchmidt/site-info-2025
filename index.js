@@ -4,6 +4,10 @@ require('dotenv').config();
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/src/views');
 
+// Importa controllers
+const professoresController = require('./src/controllers/professoresController');
+const feirasController = require('./src/controllers/feirasController');
+
 // Adicionar css e bootstrap
 app.use(express.static('public'));
 const path = require('path');
@@ -33,18 +37,11 @@ app.get('/curriculo', (req, res) => {
 });
 
 app.get('/feiras', (req, res) => {
-    let feiras = [{nome:"Feira a - 2025", imagem_path:"media/image.png", descricao:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mattis lacus. Curabitur eget est mattis, imperdiet risus sit amet, luctus leo. Suspendisse ullamcorper tempus mauris, at malesuada dolor hendrerit vel. Phasellus sed sagittis sapien. Sed lacinia faucibus rhoncus."}, {nome:"Feira a - 2025", imagem_path:"media/image.png", descricao:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mattis lacus. Curabitur eget est mattis, imperdiet risus sit amet, luctus leo. Suspendisse ullamcorper tempus mauris, at malesuada dolor hendrerit vel. Phasellus sed sagittis sapien. Sed lacinia faucibus rhoncus."}, {nome:"Feira a - 2025", imagem_path:"media/image.png", descricao:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mattis lacus. Curabitur eget est mattis, imperdiet risus sit amet, luctus leo. Suspendisse ullamcorper tempus mauris, at malesuada dolor hendrerit vel. Phasellus sed sagittis sapien. Sed lacinia faucibus rhoncus."}, {nome:"Feira a - 2025", imagem_path:"media/image.png", descricao:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mattis lacus. Curabitur eget est mattis, imperdiet risus sit amet, luctus leo. Suspendisse ullamcorper tempus mauris, at malesuada dolor hendrerit vel. Phasellus sed sagittis sapien. Sed lacinia faucibus rhoncus."}, {nome:"Feira a - 2025", imagem_path:"media/image.png", descricao:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mattis lacus. Curabitur eget est mattis, imperdiet risus sit amet, luctus leo. Suspendisse ullamcorper tempus mauris, at malesuada dolor hendrerit vel. Phasellus sed sagittis sapien. Sed lacinia faucibus rhoncus."}, {nome:"Feira a - 2025", imagem_path:"media/image.png", descricao:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec mattis lacus. Curabitur eget est mattis, imperdiet risus sit amet, luctus leo. Suspendisse ullamcorper tempus mauris, at malesuada dolor hendrerit vel. Phasellus sed sagittis sapien. Sed lacinia faucibus rhoncus."}]
-    res.render('feiras', {title:"Feiras - Informática", feiras:feiras});
+    res.render('feiras', {title:"Feiras - Informática", feiras:feirasController.getFeiras()});
 });
 
 app.get('/professores', (req, res) => {
-    let professores = 
-    [{nome:"Cândido Luciano Farias", sobre:"Coordenador do Curso", foto:"media/Candido.jpeg"}, 
-    {nome:"Diego Cândido de Souza", sobre:"Professor", foto:"media/Diego.jpeg"},
-    {nome:"Helder Palharini de Mattos", sobre:"Professor", foto:"media/Helder.jpg"}, 
-    {nome:"Erai de Souza Junior", sobre:"Professor", foto:"media/Erai.jpeg"}, 
-    {nome:"Rodrigo Henrich", sobre:"Professor", foto:"media/Rodrigo.jpg"}]
-    res.render('professores', {title:"Professores - Informática", professores:professores});
+    res.render('professores', {title:"Professores - Informática", professores:professoresController.getProfessores()});
 });
 
 app.get('/podcast', (req, res) => {
