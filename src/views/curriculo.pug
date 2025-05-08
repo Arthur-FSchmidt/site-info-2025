@@ -28,20 +28,14 @@ block content
                                 th(scope="col") 2º Ano
                                 th(scope="col") 3º Ano
                         tbody
-                            each item in diurno_formacao_geral
-                                tr  
-                                    case row
+                            - row = 1
+                            each item in diurno.formacao_geral.ciencia_humana 
+                                tr 
+                                    case row 
                                         when 1
-                                            th(scope="row", rowspan="12").vertical-text.text-center Formação Geral
-                                            th(scope="row", rowspan="4") Ciências Humanas 
-                                        when 5
-                                            th(scope="row", rowspan="3") Ciências da Natureza
-                                        when 8
-                                            th(scope="row", rowspan="4") Linguagens
-                                        when 12
-                                            th(scope="row", rowspan="1") Matemática
-                                        when 13
-                                            th(scope="row", rowspan="3", colspan="2") Parte Diversificada
+                                            - let formacao_geral_length = diurno.formacao_geral.ciencia_humana.length + diurno.formacao_geral.ciencia_natureza.length + diurno.formacao_geral.linguagens.length + diurno.formacao_geral.matematica.length;
+                                            th(scope="row", rowspan=formacao_geral_length).vertical-text.text-center Formação Geral
+                                            th(scope="row", rowspan=diurno.formacao_geral.ciencia_humana.length) Ciências Humanas
                                     - row = row + 1
                                     td= item.disciplina
                                     td.text-center= item.ano1
@@ -50,12 +44,64 @@ block content
                                     td.text-center= item.ha
                                     td.text-center= item.hr
                             - row = 1
-                            each item in diurno_formacao_profissional
-                                tr  
-                                    case row
+                            each item in diurno.formacao_geral.ciencia_natureza
+                                tr 
+                                    case row 
                                         when 1
-                                            th(scope="row", rowspan="10", colspan="2") Formação profissional
-                                    - row = row + 1        
+                                            th(scope="row", rowspan=diurno.formacao_geral.ciencia_natureza.length) Ciências da Natureza
+                                    - row = row + 1
+                                    td= item.disciplina
+                                    td.text-center= item.ano1
+                                    td.text-center= item.ano2
+                                    td.text-center= item.ano3
+                                    td.text-center= item.ha
+                                    td.text-center= item.hr
+                            - row = 1
+                            each item in diurno.formacao_geral.linguagens
+                                tr 
+                                    case row 
+                                        when 1
+                                            th(scope="row", rowspan=diurno.formacao_geral.linguagens.length) Linguagens
+                                    - row = row + 1
+                                    td= item.disciplina
+                                    td.text-center= item.ano1
+                                    td.text-center= item.ano2
+                                    td.text-center= item.ano3
+                                    td.text-center= item.ha
+                                    td.text-center= item.hr
+                            - row = 1
+                            each item in diurno.formacao_geral.matematica
+                                tr 
+                                    case row 
+                                        when 1
+                                            th(scope="row", rowspan=diurno.formacao_geral.matematica.length) Matemática
+                                    - row = row + 1
+                                    td= item.disciplina
+                                    td.text-center= item.ano1
+                                    td.text-center= item.ano2
+                                    td.text-center= item.ano3
+                                    td.text-center= item.ha
+                                    td.text-center= item.hr
+                            - row = 1
+                            each item in diurno.parte_diversificada
+                                tr 
+                                    case row 
+                                        when 1
+                                            th(scope="row", colspan="2", rowspan=diurno.parte_diversificada.length) Parte Diversificada
+                                    - row = row + 1
+                                    td= item.disciplina
+                                    td.text-center= item.ano1
+                                    td.text-center= item.ano2
+                                    td.text-center= item.ano3
+                                    td.text-center= item.ha
+                                    td.text-center= item.hr
+                            - row = 1
+                            each item in diurno.formacao_profissional
+                                tr 
+                                    case row 
+                                        when 1
+                                            th(scope="row", colspan="2", rowspan=diurno.formacao_profissional.length) Formação Profissional
+                                    - row = row + 1
                                     td= item.disciplina
                                     td.text-center= item.ano1
                                     td.text-center= item.ano2
@@ -97,15 +143,33 @@ block content
                                 th(scope="col") Semestral h/r
                         tbody 
                             - row = 1
-                            each item in noturno 
+                            each item in noturno.etapa1
                                 tr
                                     case row 
                                         when 1
-                                            th(scope="row", rowspan="7") 1ª Etapa
-                                        when 8
-                                            th(scope="row", rowspan="8") 2ª Etapa
-                                        when 16
-                                            th(scope="row", rowspan="6") 3ª Etapa
+                                            th(scope="row", rowspan=noturno.etapa1.length) 1ª Etapa
+                                    - row = row + 1        
+                                    td.text-start= item.disciplina 
+                                    td= item.periodos_semanais 
+                                    td= item.periodos_totais 
+                                    td= item.semestral
+                            - row = 1
+                            each item in noturno.etapa2
+                                tr
+                                    case row 
+                                        when 1
+                                            th(scope="row", rowspan=noturno.etapa2.length) 2ª Etapa
+                                    - row = row + 1        
+                                    td.text-start= item.disciplina 
+                                    td= item.periodos_semanais 
+                                    td= item.periodos_totais 
+                                    td= item.semestral
+                            - row = 1
+                            each item in noturno.etapa3
+                                tr
+                                    case row 
+                                        when 1
+                                            th(scope="row", rowspan=noturno.etapa3.length) 3ª Etapa
                                     - row = row + 1        
                                     td.text-start= item.disciplina 
                                     td= item.periodos_semanais 
