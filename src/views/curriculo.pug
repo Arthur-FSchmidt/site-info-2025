@@ -29,59 +29,32 @@ block content
                                 th(scope="col") 3º Ano
                         tbody
                             - row = 1
-                            each item in diurno.formacao_geral.ciencia_humana 
-                                tr 
-                                    case row 
-                                        when 1
-                                            - let formacao_geral_length = diurno.formacao_geral.ciencia_humana.length + diurno.formacao_geral.ciencia_natureza.length + diurno.formacao_geral.linguagens.length + diurno.formacao_geral.matematica.length;
-                                            th(scope="row", rowspan=formacao_geral_length).vertical-text.text-center Formação Geral
-                                            th(scope="row", rowspan=diurno.formacao_geral.ciencia_humana.length) Ciências Humanas
-                                    - row = row + 1
-                                    td= item.disciplina
-                                    td.text-center= item.ano1
-                                    td.text-center= item.ano2
-                                    td.text-center= item.ano3
-                                    td.text-center= item.ha
-                                    td.text-center= item.hr
-                            - row = 1
-                            each item in diurno.formacao_geral.ciencia_natureza
-                                tr 
-                                    case row 
-                                        when 1
-                                            th(scope="row", rowspan=diurno.formacao_geral.ciencia_natureza.length) Ciências da Natureza
-                                    - row = row + 1
-                                    td= item.disciplina
-                                    td.text-center= item.ano1
-                                    td.text-center= item.ano2
-                                    td.text-center= item.ano3
-                                    td.text-center= item.ha
-                                    td.text-center= item.hr
-                            - row = 1
-                            each item in diurno.formacao_geral.linguagens
-                                tr 
-                                    case row 
-                                        when 1
-                                            th(scope="row", rowspan=diurno.formacao_geral.linguagens.length) Linguagens
-                                    - row = row + 1
-                                    td= item.disciplina
-                                    td.text-center= item.ano1
-                                    td.text-center= item.ano2
-                                    td.text-center= item.ano3
-                                    td.text-center= item.ha
-                                    td.text-center= item.hr
-                            - row = 1
-                            each item in diurno.formacao_geral.matematica
-                                tr 
-                                    case row 
-                                        when 1
-                                            th(scope="row", rowspan=diurno.formacao_geral.matematica.length) Matemática
-                                    - row = row + 1
-                                    td= item.disciplina
-                                    td.text-center= item.ano1
-                                    td.text-center= item.ano2
-                                    td.text-center= item.ano3
-                                    td.text-center= item.ha
-                                    td.text-center= item.hr
+                            each area, area_nome in diurno.formacao_geral
+                                - row = 1
+                                each conteudo in area
+                                    tr 
+                                        case area_nome
+                                            when 'ciencia_humana'
+                                                if row == 1
+                                                    - let formacao_geral_length = diurno.formacao_geral.ciencia_humana.length + diurno.formacao_geral.ciencia_natureza.length + diurno.formacao_geral.linguagens.length + diurno.formacao_geral.matematica.length;
+                                                    th(scope="row", rowspan=formacao_geral_length).vertical-text.text-center Formação Geral
+                                                    th(scope="row", rowspan=diurno.formacao_geral.ciencia_humana.length) Ciências Humanas
+                                            when 'ciencia_natureza'
+                                                if row == 1
+                                                    th(scope="row", rowspan=diurno.formacao_geral.ciencia_natureza.length) Ciências da Natureza
+                                            when 'linguagens'
+                                                if row == 1
+                                                    th(scope="row", rowspan=diurno.formacao_geral.linguagens.length) Linguagens
+                                            when 'matematica'
+                                                if row == 1
+                                                    th(scope="row", rowspan=diurno.formacao_geral.matematica.length) Matemática
+                                        - row = row + 1
+                                        td= conteudo.disciplina
+                                        td.text-center= conteudo.ano1
+                                        td.text-center= conteudo.ano2
+                                        td.text-center= conteudo.ano3
+                                        td.text-center= conteudo.ha
+                                        td.text-center= conteudo.hr
                             - row = 1
                             each item in diurno.parte_diversificada
                                 tr 
