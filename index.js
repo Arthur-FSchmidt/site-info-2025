@@ -38,6 +38,17 @@ app.get('/feiras', (req, res) => {
     res.render('feiras', {title:"Feiras - Informática", feiras:feirasController.getFeiras()});
 });
 
+app.get('/feiras/:ano/:nome', (req, res) => {
+    const ano = req.params.ano;
+    const nome = req.params.nome;
+    const feira = feirasController.getFeira(ano, nome);
+    if (!feira) {
+        return res.status(404).render('404', {title:"Não encontrado - Informática"});
+    }
+    let title = feira.nome + " " + feira.ano + " - Informática"; 
+    res.render('feira', {title:title, feira:feira});
+});
+
 app.get('/professores', (req, res) => {
     res.render('professores', {title:"Professores - Informática", professores:professoresController.getProfessores()});
 });
@@ -47,7 +58,7 @@ app.get('/podcast', (req, res) => {
 });
 
 app.use((req, res, next) => {
-    res.render('404', {title:"Não encontrado - Informática"});
+    res.status(404).render('404', {title:"Não encontrado - Informática"});
 });
 
 // Start Server

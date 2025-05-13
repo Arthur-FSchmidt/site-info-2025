@@ -1,0 +1,30 @@
+extends layout 
+
+block content
+    .container.p-3 
+        .row
+            a(href="/feiras").btn.btn-secondary.m-3
+                i.bi.bi-arrow-left-short.fs-3.align-middle
+                span.align-middle Voltar
+        .row 
+            .col-12.col-md-6.col-lg-4
+                img(src=feira.imagem_path, alt="").w-100.rounded
+            .col-12.col-md-6.col-lg-8
+                h1.p-2= feira.nome
+                p.p-2= feira.descricao
+        .row.p-3.m-3
+            if feira.imagens && feira.imagens.length
+                h4.p-2 Mais Imagens
+                each imagem in feira.imagens
+                    .col-6.col-md-4.col-lg-2
+                        a(href="#imageModal-"+imagem.nome, data-bs-toggle="modal", data-bs-target="#imageModal-"+imagem.nome, data-bs-image=imagem.path)
+                            img(src=imagem.path, alt="Imagem adicional").img-fluid.rounded
+                    // Modal para exibir a imagem ampliada
+                    .modal.fade(id="imageModal-"+imagem.nome, tabindex="-1", aria-labelledby="imageModalLabel", aria-hidden="true")
+                        .modal-dialog.modal-dialog-centered
+                            .modal-content
+                                .modal-body
+                                    p= imagem.nome
+                                    img(id="modalImage-"+imagem.nome, src=imagem.path, alt="Imagem ampliada").img-fluid.rounded
+
+                                

@@ -12,10 +12,10 @@ block content
                     each lista_feiras, ano in feiras
                         if ano == 2015
                             li(role="presentation").nav-item.mx-1
-                                a(id= "2015-tab" data-bs-toggle="tab" data-bs-target="#2015" type="button" role="tab" aria-controls="2015" aria-selected="true").nav-link.active 2015
+                                a(id= "2015-tab" data-bs-toggle="tab" data-bs-target="#2015" type="button" role="tab" aria-controls="2015" aria-selected="true").nav-link.link-dark.active 2015
                         else
                             li(role="presentation").nav-item.mx-1
-                                a(id= ano + "-tab" data-bs-toggle="tab" data-bs-target="#"+ano type="button" role="tab" aria-controls= ano aria-selected="false").nav-link= ano
+                                a(id= ano + "-tab" data-bs-toggle="tab" data-bs-target="#"+ano type="button" role="tab" aria-controls= ano aria-selected="false").nav-link.link-dark= ano
 
         .row
             .tab-content
@@ -30,6 +30,9 @@ block content
                                             .card-body 
                                                 h1.card-title.m-3= item.nome
                                                 p.card-text.m-3= item.descricao
+                                                a(href="/feiras/"+ano+"/"+item.nome).btn.btn-secondary.m-3
+                                                    i.bi.bi-arrow-right-short.fs-3.align-middle
+                                                    span.align-middle Saiba Mais
                     else
                         div(role="tabpanel" aria-labelledby=ano+"-tab" tabindex="0" id=ano).tab-pane.fade.justify-content-center.g-4
                             .row.justify-content-center.g-4
@@ -40,3 +43,6 @@ block content
                                             .card-body 
                                                 h1.card-title.m-3= item.nome
                                                 p.card-text.m-3= item.descricao
+                                                a(href="/feiras/"+ano+"/"+item.nome).btn.btn-secondary.m-3
+                                                    i.bi.bi-arrow-right-short.fs-3.align-middle
+                                                    span.align-middle Saiba Mais
