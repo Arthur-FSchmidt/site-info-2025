@@ -1,0 +1,33 @@
+extends layout 
+
+block content 
+    .video.d-flex.justify-content-center
+        .ratio.ratio-16x9.w-75
+            iframe(src="https://www.youtube-nocookie.com/embed/SxldaTkGKQE?si=DkC3V6qK8yyGv_zR&amp;controls=0", title="YouTube video player", frameborder="0", allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share", referrerpolicy="strict-origin-when-cross-origin", allowfullscreen)
+    .intro 
+        .container.text-center.d-flex.justify-content-center
+            .row.p-4.w-75
+                .col.col-lg-6.p-3
+                    img(src="/media/info2.png", alt="").img-fluid
+                .col.col-lg-6.align-content-center.p-3
+                    p.text-white.justify Semana da Informática, é um evento que busca trazer conhecimento aos alunos do Curso Técnico em Informática, a respeito de, carreira, mercado de trabalho e experiências. Ocorrerão diversas palestras, com assuntos variados, a respeito da realidade encontrada no mercado. Incluindo as demais dimensões deste contexto.
+    .edicoes.text-center 
+        h1.p-3 EDIÇÕES
+        .container.text-center
+            .row
+                .col-lg-3
+                    a(href="/semanadainformatica/2019").text-decoration-none
+                        img(src="/media/2019.png", class="edicao", alt="").img-fluid
+                        h3 2019
+                .col-lg-3
+                    a(href="/semanadainformatica/2022").text-decoration-none
+                        img(src="/media/2022.png", class="edicao", alt="").img-fluid
+                        h3 2022
+                .col-lg-3
+                    a(href="/semanadainformatica/2023").text-decoration-none
+                        img(src="/media/2023.png", class="edicao", alt="").img-fluid
+                        h3 2023
+                .col-lg-3
+                    a(href="/semanadainformatica/2024").text-decoration-none
+                        img(src="/media/2024.png", class="edicao", alt="").img-fluid
+                        h3 2024

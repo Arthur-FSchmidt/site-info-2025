@@ -1,6 +1,9 @@
 #logo {
     height: 70px;
 }
+.justify{
+    text-align: justify;
+}
 .nav-footer {
     background-color: #000518;
 }
@@ -25,5 +28,8 @@
 }
 .vertical-text {
     writing-mode: sideways-lr;
+}
+.intro{
+    background-color: #101529;
 }
 

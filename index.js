@@ -9,6 +9,7 @@ const professoresController = require('./src/controllers/professoresController')
 const feirasController = require('./src/controllers/feirasController');
 const curriculoController = require('./src/controllers/curriculoController');
 const homeCardsController = require('./src/controllers/homeCardsController');
+const semanaInfoController = require('./src/controllers/semanaInfoController');
 
 // Adicionar css e bootstrap
 app.use(express.static('public'));
@@ -28,6 +29,19 @@ app.get('/', (req, res) => {
 
 app.get('/sobre', (req, res) => {
     res.render('sobre', {title:"Sobre - Informática"});
+});
+
+app.get('/semanadainformatica', (req, res) => {
+    res.render('semanadainformatica', {title:"Semana da Informática - Informática"});
+});
+
+app.get('/semanadainformatica/:ano', (req, res) => {
+    const ano = req.params.ano;
+    const semanaInfo = semanaInfoController.getAno(ano);
+    if (!semanaInfo) {
+        return res.status(404).render('404', {title:"Não encontrado - Informática"});
+    }
+    res.render('semanaInfoEdicoes', {title:"Semana da Informática - Informática", edicao:semanaInfo});
 });
 
 app.get('/curriculo', (req, res) => {

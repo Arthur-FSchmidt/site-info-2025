@@ -3,9 +3,10 @@ extends layout
 block content
     .container.p-3 
         .row
-            a(href="/feiras").btn.btn-secondary.m-3
-                i.bi.bi-arrow-left-short.fs-3.align-middle
-                span.align-middle Voltar
+            .col-12
+                a(href="/feiras").btn.btn-secondary.mb-3
+                    i.bi.bi-arrow-left-short.fs-3.align-middle
+                    span.align-middle Voltar
         .row 
             .col-12.col-md-6.col-lg-4
                 img(src=feira.imagem_path, alt="").w-100.rounded

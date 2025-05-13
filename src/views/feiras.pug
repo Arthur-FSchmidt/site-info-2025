@@ -27,9 +27,9 @@ block content
                                     .col-12.col-md-6.col-lg-3
                                         .card.border-0.shadow.rounded-4.m-3.p-0
                                             img(src=item.imagem_path, alt="").w-100.rounded-top-4.card-img-top
-                                            .card-body 
+                                            .card-body
                                                 h1.card-title.m-3= item.nome
-                                                p.card-text.m-3= item.descricao
+                                                p.card-text.m-3= item.descricao.slice(0, 90) + "..."
                                                 a(href="/feiras/"+ano+"/"+item.nome).btn.btn-secondary.m-3
                                                     i.bi.bi-arrow-right-short.fs-3.align-middle
                                                     span.align-middle Saiba Mais
@@ -38,11 +38,11 @@ block content
                             .row.justify-content-center.g-4
                                 each item in lista_feiras
                                     .col-12.col-md-6.col-lg-3
-                                        .card.border-0.shadow.rounded-4.m-3.p-0
+                                        .card.border-0.shadow.rounded-4.m-3.p-0     
                                             img(src=item.imagem_path, alt="").w-100.rounded-top-4.card-img-top
-                                            .card-body 
+                                            .card-body
                                                 h1.card-title.m-3= item.nome
-                                                p.card-text.m-3= item.descricao
+                                                p.card-text.m-3= item.descricao.slice(0, 95) + "..."
                                                 a(href="/feiras/"+ano+"/"+item.nome).btn.btn-secondary.m-3
                                                     i.bi.bi-arrow-right-short.fs-3.align-middle
                                                     span.align-middle Saiba Mais
