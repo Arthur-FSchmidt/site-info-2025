@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    .container.p-3
+        .row.justify-content-center
+            .col-md-6
+                h1.text-center Login Administrativo
+                form(method="POST" action="/admin")
+                    .mb-3
+                        label(for="password") Senha
+                        input#password.form-control(type="password" name="password" required)
+                    button.btn.btn-primary(type="submit") Entrar

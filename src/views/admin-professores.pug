@@ -1,0 +1,42 @@
+extends layout
+
+block content
+    .container.p-3
+        h1 Gerenciar Professores
+        // Formulário para adicionar professor
+        form(method="POST" action="/admin/professores/add")
+            .mb-3
+                label(for="nome") Nome
+                input#nome.form-control(type="text" name="nome" required)
+            .mb-3
+                label(for="sobre") Sobre
+                input#sobre.form-control(type="text" name="sobre" required)
+            .mb-3
+                label(for="foto") Foto (URL)
+                input#foto.form-control(type="text" name="foto" required)
+            button.btn.btn-primary(type="submit") Adicionar Professor
+
+        // Lista de professores
+        .row.justify-content-center.m-3
+            .col.col-md-10.col-lg-10
+                h2.text-center Professores Cadastrados
+        .row
+            each prof, index in professores
+                .col.col-md-4.p-5
+                    img(src=prof.foto, alt=prof.nome).img-fluid.p-3
+                .col.col-md-8.d-grid.align-content-center
+                    // Formulário para editar professor
+                    form(method="POST" action=`/admin/professores/edit/${index}`)
+                        .mb-2
+                            label(for="nome-${index}") Nome
+                            input.form-control(id="nome-"+index, type="text" name="nome" value=prof.nome required)
+                        .mb-2
+                            label(for="sobre-${index}") Sobre
+                            input.form-control(id="sobre-"+index, type="text" name="sobre" value=prof.sobre required)
+                        .mb-2
+                            label(for="foto-${index}") Foto (URL)
+                            input.form-control(id="foto-"+index, type="text" name="foto" value=prof.foto required)
+                        button.btn.btn-warning.p-2.m-2(type="submit") Salvar
+                    // Formulário para excluir professor
+                    form(method="POST" action=`/admin/professores/delete/${index}`)
+                        button.btn.btn-danger.p-2.m-2(type="submit") Excluir

@@ -22,7 +22,27 @@ app.use('/icons', express.static(path.join(__dirname, 'node_modules/bootstrap-ic
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const session = require('express-session');
+
+// Configurar sessões
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'default_secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // Use secure: true em produção com HTTPS
+}));
+
+// Middleware para verificar autenticação
+function authMiddleware(req, res, next) {
+    if (req.session && req.session.isAuthenticated) {
+        return next(); // Permite o acesso à rota
+    }
+    res.status(403).render('403', { title: "Acesso Negado - Informática" });
+}
+
 // Rotas
+
+
 app.get('/', (req, res) => {
     res.render('index', {title:"Informática", cards:homeCardsController.getCards()});
 });
@@ -70,6 +90,69 @@ app.get('/professores', (req, res) => {
 app.get('/podcast', (req, res) => {
     res.render('podcast', {title:"Podcast - Informática"});
 });
+
+// Rotas administrativas
+
+// Rota para exibir o formulário de login
+app.get('/admin', (req, res) => {
+    res.render('admin-login', { title: "Login Administrativo - Informática" });
+});
+
+// Rota protegida (exige autenticação)
+app.post('/admin', (req, res) => {
+    const { password } = req.body;
+
+    // Verifica se a senha enviada corresponde à senha do .env
+    if (password === process.env.ADMIN_PASSWORD) {
+        req.session.isAuthenticated = true; // Salva o estado de autenticação na sessão
+        return res.redirect('/admin/dashboard');
+    }
+
+    // Caso a senha esteja errada, retorna um erro 403 (Proibido)
+    res.status(403).render('403', { title: "Acesso Negado - Informática" });
+});
+
+// Rota para o painel administrativo
+app.get('/admin/dashboard', authMiddleware, (req, res) => {
+    res.render('admin-dashboard', { title: "Painel Administrativo - Informática" });
+});
+
+// Rota para listar professores no painel administrativo
+app.get('/admin/professores', authMiddleware, (req, res) => {
+    const professores = professoresController.getProfessores();
+    res.render('admin-professores', { title: "Gerenciar Professores", professores });
+});
+
+// Rota para adicionar um professor
+app.post('/admin/professores/add', authMiddleware, (req, res) => {
+    const { nome, sobre, foto } = req.body;
+    professoresController.addProfessor({ nome, sobre, foto });
+    res.redirect('/admin/professores');
+});
+
+// Rota para editar um professor
+app.post('/admin/professores/edit/:index', authMiddleware, (req, res) => {
+    const index = req.params.index;
+    const { nome, sobre, foto } = req.body;
+    professoresController.editProfessor(index, { nome, sobre, foto });
+    res.redirect('/admin/professores');
+});
+
+// Rota para excluir um professor
+app.post('/admin/professores/delete/:index', authMiddleware, (req, res) => {
+    const index = req.params.index;
+    professoresController.deleteProfessor(index);
+    res.redirect('/admin/professores');
+});
+
+// Rota para logout
+app.get('/admin/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/admin');
+    });
+});
+
+// Erro 404
 
 app.use((req, res, next) => {
     res.status(404).render('404', {title:"Não encontrado - Informática"});
