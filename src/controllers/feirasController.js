@@ -37,4 +37,24 @@ async function deleteFeira(id) {
     await feirasModel.deleteFeira(id);
 }
 
-module.exports = { getFeiras, getFeira, addFeira, editFeira, deleteFeira };
+// Função para buscar imagens adicionais de uma feira
+async function getImagensByFeiraId(feiraId) {
+    return await feirasModel.getImagensByFeiraId(feiraId);
+}
+
+// Função para adicionar uma nova imagem
+async function addImagem(feiraId, imagem) {
+    await feirasModel.addImagem(feiraId, imagem);
+}
+
+// Função para editar uma imagem existente
+async function editImagem(id, imagem) {
+    await feirasModel.editImagem(id, imagem);
+}
+
+// Função para deletar uma imagem
+async function deleteImagem(id) {
+    await feirasModel.deleteImagem(id);
+}
+
+module.exports = { getFeiras, getFeira, addFeira, editFeira, deleteFeira, getImagensByFeiraId, addImagem, editImagem, deleteImagem };

@@ -59,4 +59,39 @@ async function deleteFeira(id) {
     await db.query('DELETE FROM site.feiras WHERE id = $1', [id]);
 }
 
-module.exports = { getFeiras, getFeira, addFeira, editFeira, deleteFeira };
+// Função para buscar imagens adicionais de uma feira
+async function getImagensByFeiraId(feiraId) {
+    const query = `
+        SELECT id, nome, path
+        FROM site.feiras_imagens
+        WHERE feira_id = $1
+        ORDER BY id;
+    `;
+    const result = await db.query(query, [feiraId]);
+    return result.rows;
+}
+
+// Função para adicionar uma nova imagem
+async function addImagem(feiraId, imagem) {
+    const { nome, path } = imagem;
+    await db.query(
+        'INSERT INTO site.feiras_imagens (feira_id, nome, path) VALUES ($1, $2, $3)',
+        [feiraId, nome, path]
+    );
+}
+
+// Função para editar uma imagem existente
+async function editImagem(id, imagem) {
+    const { nome, path } = imagem;
+    await db.query(
+        'UPDATE site.feiras_imagens SET nome = $1, path = $2 WHERE id = $3',
+        [nome, path, id]
+    );
+}
+
+// Função para deletar uma imagem
+async function deleteImagem(id) {
+    await db.query('DELETE FROM site.feiras_imagens WHERE id = $1', [id]);
+}
+
+module.exports = { getFeiras, getFeira, addFeira, editFeira, deleteFeira, getImagensByFeiraId, addImagem, editImagem, deleteImagem };

@@ -29,6 +29,9 @@ block content
                     .card.mb-3
                         img.card-img-top(src=feira.imagem_path, alt=feira.nome)
                         .card-body
+                            h5.card-title= feira.nome
+                            p.card-text= feira.descricao
+                            small.text-muted= feira.ano
                             // Formulário para editar a feira
                             form(method="POST" action=`/admin/feiras/edit/${feira.id}`)
                                 .mb-2
@@ -43,7 +46,9 @@ block content
                                 .mb-2
                                     label(for=`imagem_path-${feira.id}`) Caminho da Imagem
                                     input.form-control(id=`imagem_path-${feira.id}`, type="text", name="imagem_path", value=feira.imagem_path, required)
-                                button.btn.btn-warning.p-2.m-2(type="submit") Salvar
+                                button.btn.btn-warning.p-2.m-2.w-100(type="submit") Salvar
+                            // Botão para acessar o painel de imagens adicionais
+                            a.btn.btn-secondary.p-2.m-2.w-100(href=`/admin/feiras/${feira.id}/imagens`) Gerenciar Imagens
                             // Formulário para deletar a feira
                             form(method="POST" action=`/admin/feiras/delete/${feira.id}`)
-                                button.btn.btn-danger.p-2.m-2(type="submit") Excluir
+                                button.btn.btn-danger.p-2.m-2.w-100(type="submit") Excluir

@@ -195,6 +195,38 @@ app.post('/admin/feiras/delete/:id', authMiddleware, async (req, res) => {
     res.redirect('/admin/feiras');
 });
 
+// Rota para listar imagens adicionais de uma feira
+app.get('/admin/feiras/:id/imagens', authMiddleware, async (req, res) => {
+    const feiraId = req.params.id;
+    const imagens = await feirasController.getImagensByFeiraId(feiraId);
+    res.render('admin-feiras-imagens', { title: "Gerenciar Imagens", feiraId, imagens });
+});
+
+// Rota para adicionar uma nova imagem
+app.post('/admin/feiras/:id/imagens/add', authMiddleware, async (req, res) => {
+    const feiraId = req.params.id;
+    const { nome, path } = req.body;
+    await feirasController.addImagem(feiraId, { nome, path });
+    res.redirect(`/admin/feiras/${feiraId}/imagens`);
+});
+
+// Rota para editar uma imagem existente
+app.post('/admin/feiras/imagens/edit/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id;
+    const { nome, path } = req.body;
+    const feiraId = req.body.feiraId;
+    await feirasController.editImagem(id, { nome, path });
+    res.redirect('/admin/feiras/' + feiraId + '/imagens');
+});
+
+// Rota para deletar uma imagem
+app.post('/admin/feiras/imagens/delete/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id;
+    const feiraId = req.body.feiraId;
+    await feirasController.deleteImagem(id);
+    res.redirect('/admin/feiras/' + feiraId + '/imagens');
+});
+
 // Rota para logout
 app.get('/admin/logout', (req, res) => {
     req.session.destroy(() => {
