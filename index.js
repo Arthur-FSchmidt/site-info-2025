@@ -92,8 +92,9 @@ app.get('/feiras/:ano/:nome', (req, res) => {
     res.render('feira', {title:title, feira:feira});
 });
 
-app.get('/professores', (req, res) => {
-    res.render('professores', {title:"Professores - Informática", professores:professoresController.getProfessores()});
+app.get('/professores', async (req, res) => {
+    const professores = await professoresController.getProfessores();
+    res.render('professores', {title:"Professores - Informática", professores});
 });
 
 app.get('/podcast', (req, res) => {
@@ -127,30 +128,30 @@ app.get('/admin/dashboard', authMiddleware, (req, res) => {
 });
 
 // Rota para listar professores no painel administrativo
-app.get('/admin/professores', authMiddleware, (req, res) => {
-    const professores = professoresController.getProfessores();
+app.get('/admin/professores', authMiddleware, async (req, res) => {
+    const professores = await professoresController.getProfessores();
     res.render('admin-professores', { title: "Gerenciar Professores", professores });
 });
 
 // Rota para adicionar um professor
-app.post('/admin/professores/add', authMiddleware, (req, res) => {
+app.post('/admin/professores/add', authMiddleware, async (req, res) => {
     const { nome, sobre, foto } = req.body;
-    professoresController.addProfessor({ nome, sobre, foto });
+    await professoresController.addProfessor({ nome, sobre, foto });
     res.redirect('/admin/professores');
 });
 
 // Rota para editar um professor
-app.post('/admin/professores/edit/:index', authMiddleware, (req, res) => {
-    const index = req.params.index;
+app.post('/admin/professores/edit/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id;
     const { nome, sobre, foto } = req.body;
-    professoresController.editProfessor(index, { nome, sobre, foto });
+    await professoresController.editProfessor(id, { nome, sobre, foto });
     res.redirect('/admin/professores');
 });
 
 // Rota para excluir um professor
-app.post('/admin/professores/delete/:index', authMiddleware, (req, res) => {
-    const index = req.params.index;
-    professoresController.deleteProfessor(index);
+app.post('/admin/professores/delete/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id;
+    await professoresController.deleteProfessor(id);
     res.redirect('/admin/professores');
 });
 

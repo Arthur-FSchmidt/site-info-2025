@@ -1,19 +1,19 @@
 const professoresModel = require('../models/professoresModel');
 
-function getProfessores() {
-    return professoresModel.getProfessores();
+async function getProfessores() {
+    return await professoresModel.getProfessores();
 }
 
-function addProfessor(professor) {
-    professoresModel.addProfessor(professor);
+async function addProfessor(professor) {
+    await professoresModel.addProfessor(professor);
 }
 
-function editProfessor(index, professor) {
-    professoresModel.editProfessor(index, professor);
+async function editProfessor(id, professor) {
+    await professoresModel.editProfessor(id, professor);
 }
 
-function deleteProfessor(index) {
-    professoresModel.deleteProfessor(index);
+async function deleteProfessor(id) {
+    await professoresModel.deleteProfessor(id);
 }
 
 module.exports = { getProfessores, addProfessor, editProfessor, deleteProfessor };

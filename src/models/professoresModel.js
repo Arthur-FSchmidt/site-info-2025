@@ -1,29 +1,22 @@
-let professores = [
-    { nome: "Cândido Luciano Farias", sobre: "Coordenador do Curso", foto: "/media/Candido.jpeg" },
-    { nome: "Diego Cândido de Souza", sobre: "Professor", foto: "/media/Diego.jpeg" },
-    { nome: "Helder Palharini de Mattos", sobre: "Professor", foto: "/media/Helder.jpg" },
-    { nome: "Erai de Souza Junior", sobre: "Professor", foto: "/media/Erai.jpeg" },
-    { nome: "Rodrigo Henrich", sobre: "Professor", foto: "/media/Rodrigo.jpg" }
-];
+const db = require('./connection');
 
-function getProfessores() {
-    return professores;
+async function getProfessores() {
+    const result = await db.query('SELECT * FROM site.professores ORDER BY id');
+    return result.rows;
 }
 
-function addProfessor(professor) {
-    professores.push(professor);
+async function addProfessor(professor) {
+    const { nome, sobre, foto } = professor;
+    await db.query('INSERT INTO site.professores (nome, sobre, foto) VALUES ($1, $2, $3)', [nome, sobre, foto]);
 }
 
-function editProfessor(index, professor) {
-    if (professores[index]) {
-        professores[index] = professor;
-    }
+async function editProfessor(id, professor) {
+    const { nome, sobre, foto } = professor;
+    await db.query('UPDATE site.professores SET nome = $1, sobre = $2, foto = $3 WHERE id = $4', [nome, sobre, foto, id]);
 }
 
-function deleteProfessor(index) {
-    if (professores[index]) {
-        professores.splice(index, 1);
-    }
+async function deleteProfessor(id) {
+    await db.query('DELETE FROM site.professores WHERE id = $1', [id]);
 }
 
 module.exports = { getProfessores, addProfessor, editProfessor, deleteProfessor };
