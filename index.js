@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 app.set('view engine', 'pug');
@@ -22,8 +24,6 @@ app.use('/icons', express.static(path.join(__dirname, 'node_modules/bootstrap-ic
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const session = require('express-session');
-
 // Configurar sessões
 app.use(session({
     secret: process.env.SESSION_SECRET || 'default_secret',
@@ -31,6 +31,16 @@ app.use(session({
     saveUninitialized: false,
     cookie: { secure: false } // Use secure: true em produção com HTTPS
 }));
+
+// Configurar CORS
+const corsOptions = {
+    origin: '*', // Permite todas as origens. Substitua por um domínio específico, se necessário.
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+};
+
+// Aplicar o middleware CORS
+app.use(cors(corsOptions));
 
 // Middleware para verificar autenticação
 function authMiddleware(req, res, next) {
@@ -41,7 +51,6 @@ function authMiddleware(req, res, next) {
 }
 
 // Rotas
-
 
 app.get('/', (req, res) => {
     res.render('index', {title:"Informática", cards:homeCardsController.getCards()});
