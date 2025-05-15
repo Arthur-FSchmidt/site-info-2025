@@ -9,18 +9,22 @@ block content
         .row.justify-content-center.m-3    
             .col.col-md-8.mb-1
                 ul(role="tablist").nav.nav-tabs.justify-content-center.p-2.pb-0
+                    - let col = 0;
                     each lista_feiras, ano in feiras
-                        if ano == 2015
+                        - col = col + 1;
+                        if col == 1
                             li(role="presentation").nav-item.mx-1
-                                a(id= "2015-tab" data-bs-toggle="tab" data-bs-target="#2015" type="button" role="tab" aria-controls="2015" aria-selected="true").nav-link.link-dark.active 2015
+                                a(id= ano + "-tab" data-bs-toggle="tab" data-bs-target="#"+ano type="button" role="tab" aria-controls= ano aria-selected="false").nav-link.link-dark.active= ano
                         else
                             li(role="presentation").nav-item.mx-1
                                 a(id= ano + "-tab" data-bs-toggle="tab" data-bs-target="#"+ano type="button" role="tab" aria-controls= ano aria-selected="false").nav-link.link-dark= ano
 
         .row
             .tab-content
+                - col = 0;
                 each lista_feiras, ano in feiras
-                    if ano == 2015
+                    - col = col + 1;
+                    if col == 1
                         div(role="tabpanel" aria-labelledby=ano+"-tab" tabindex="0" id=ano).tab-pane.fade.active.show.justify-content-center.g-4
                             .row.justify-content-center.g-4
                                 each item in lista_feiras

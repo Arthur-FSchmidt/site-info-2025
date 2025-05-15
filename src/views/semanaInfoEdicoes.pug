@@ -10,21 +10,43 @@ block content
         .row.justify-content-center.m-3    
                     .col.col-md-8.mb-1
                         ul(role="tablist").nav.nav-tabs.justify-content-center.p-2.pb-0
+                            - let col = 0;
                             each lista_dias, dia in edicao.palestras
-                                li(role="presentation").nav-item.mx-1
-                                    a(id= dia + "-tab" data-bs-toggle="tab" data-bs-target="#"+dia type="button" role="tab" aria-controls= dia aria-selected="false").nav-link.link-dark= dia.slice(3).replace("_", "/")
+                                - col = col + 1;
+                                if col == 1
+                                    li(role="presentation").nav-item.mx-1
+                                        a(id= dia + "-tab" data-bs-toggle="tab" data-bs-target="#"+dia type="button" role="tab" aria-controls= dia aria-selected="false").nav-link.link-dark.active= dia.slice(3).replace("_", "/")
+                                else
+                                    li(role="presentation").nav-item.mx-1
+                                        a(id= dia + "-tab" data-bs-toggle="tab" data-bs-target="#"+dia type="button" role="tab" aria-controls= dia aria-selected="false").nav-link.link-dark= dia.slice(3).replace("_", "/")
         .row
             .tab-content
+                - col = 0;
                 each lista_dias, dia in edicao.palestras
-                    div(role="tabpanel" aria-labelledby=dia+"-tab" tabindex="0" id=dia).tab-pane.fade.justify-content-center.g-4
-                        .row.justify-content-center.g-4
-                            each item in lista_dias
-                                .col-12.w-50
-                                    .card.border-0.shadow.rounded-4.m-3.p-0   
-                                        .row
-                                            .col-12.col-lg-5.align-content-center
-                                                img(src=item.imagem_path, alt="").img-fluid.w-100.rounded-4  
-                                            .col-12.col-lg-7.d-grid.align-content-between
-                                                h3.card-title.py-2.m-1= item.palestrante
-                                                p.card-text.py-2.m-1= item.titulo
-                                                h4.card-text.py-2.m-1= item.horario
+                    - col = col + 1;
+                    if col == 1
+                        div(role="tabpanel" aria-labelledby=dia+"-tab" tabindex="0" id=dia).tab-pane.fade.active.show.justify-content-center.g-4
+                            .row.justify-content-center.g-4
+                                each item in lista_dias
+                                    .col-12.w-50
+                                        .card.border-0.shadow.rounded-4.m-3.p-0   
+                                            .row
+                                                .col-12.col-lg-5.align-content-center
+                                                    img(src=item.imagem_path, alt="").img-fluid.w-100.rounded-4  
+                                                .col-12.col-lg-7.d-grid.align-content-between
+                                                    h3.card-title.py-2.m-1= item.palestrante
+                                                    p.card-text.py-2.m-1= item.titulo
+                                                    h4.card-text.py-2.m-1= item.horario
+                    else
+                        div(role="tabpanel" aria-labelledby=dia+"-tab" tabindex="0" id=dia).tab-pane.fade.justify-content-center.g-4
+                            .row.justify-content-center.g-4
+                                each item in lista_dias
+                                    .col-12.w-50
+                                        .card.border-0.shadow.rounded-4.m-3.p-0   
+                                            .row
+                                                .col-12.col-lg-5.align-content-center
+                                                    img(src=item.imagem_path, alt="").img-fluid.w-100.rounded-4  
+                                                .col-12.col-lg-7.d-grid.align-content-between
+                                                    h3.card-title.py-2.m-1= item.palestrante
+                                                    p.card-text.py-2.m-1= item.titulo
+                                                    h4.card-text.py-2.m-1= item.horario

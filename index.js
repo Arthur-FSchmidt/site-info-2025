@@ -35,8 +35,8 @@ app.use(session({
 // Configurar CORS
 const corsOptions = {
     origin: '*', // Permite todas as origens. Substitua por um domínio específico, se necessário.
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 // Aplicar o middleware CORS
@@ -77,7 +77,6 @@ app.get('/curriculo', (req, res) => {
     res.render('curriculo', {title:"Currículo - Informática", diurno:curriculoController.getCurriculoDiurno(), noturno:curriculoController.getCurriculoNoturno()});
 });
 
-// Rota para listar todas as feiras
 app.get('/feiras', async (req, res) => {
     try {
         const feiras = await feirasController.getFeiras();
@@ -88,7 +87,6 @@ app.get('/feiras', async (req, res) => {
     }
 });
 
-// Rota para exibir uma feira específica
 app.get('/feiras/:ano/:nome', async (req, res) => {
     try {
         const { ano, nome } = req.params;
