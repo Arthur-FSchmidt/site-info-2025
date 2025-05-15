@@ -22,4 +22,19 @@ async function getFeira(ano, nome) {
     return await feirasModel.getFeira(ano, nome);
 }
 
-module.exports = { getFeiras, getFeira };
+// Função para adicionar uma nova feira
+async function addFeira(feira) {
+    await feirasModel.addFeira(feira);
+}
+
+// Função para editar uma feira existente
+async function editFeira(id, feira) {
+    await feirasModel.editFeira(id, feira);
+}
+
+// Função para deletar uma feira
+async function deleteFeira(id) {
+    await feirasModel.deleteFeira(id);
+}
+
+module.exports = { getFeiras, getFeira, addFeira, editFeira, deleteFeira };

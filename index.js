@@ -93,7 +93,6 @@ app.get('/feiras/:ano/:nome', async (req, res) => {
     try {
         const { ano, nome } = req.params;
         const feira = await feirasController.getFeira(ano, nome);
-        console.log(feira);
         if (!feira) {
             return res.status(404).render('404', { title: "Não encontrado - Informática" });
         }
@@ -166,6 +165,34 @@ app.post('/admin/professores/delete/:id', authMiddleware, async (req, res) => {
     const id = req.params.id;
     await professoresController.deleteProfessor(id);
     res.redirect('/admin/professores');
+});
+
+// Rota para listar feiras no painel administrativo
+app.get('/admin/feiras', authMiddleware, async (req, res) => {
+    const feiras = await feirasController.getFeiras();
+    res.render('admin-feiras', { title: "Gerenciar Feiras", feiras });
+});
+
+// Rota para adicionar uma nova feira
+app.post('/admin/feiras/add', authMiddleware, async (req, res) => {
+    const { nome, ano, descricao, imagem_path } = req.body;
+    await feirasController.addFeira({ nome, ano, descricao, imagem_path });
+    res.redirect('/admin/feiras');
+});
+
+// Rota para editar uma feira existente
+app.post('/admin/feiras/edit/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id;
+    const { nome, ano, descricao, imagem_path } = req.body;
+    await feirasController.editFeira(id, { nome, ano, descricao, imagem_path });
+    res.redirect('/admin/feiras');
+});
+
+// Rota para deletar uma feira
+app.post('/admin/feiras/delete/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id;
+    await feirasController.deleteFeira(id);
+    res.redirect('/admin/feiras');
 });
 
 // Rota para logout

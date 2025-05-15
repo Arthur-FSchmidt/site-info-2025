@@ -1,0 +1,49 @@
+extends layout 
+
+block content
+    .container.p-3
+        .row
+            a.btn.btn-danger.m-2.p-2.align-content-center(href="/admin/dashboard") Voltar
+        h1 Gerenciar Feiras
+        // Formulário para adicionar uma nova feira
+        form(method="POST" action="/admin/feiras/add")
+            .mb-3
+                label(for="nome") Nome
+                input#nome.form-control(type="text" name="nome" required)
+            .mb-3
+                label(for="ano") Ano
+                input#ano.form-control(type="number" name="ano" required)
+            .mb-3
+                label(for="descricao") Descrição
+                textarea#descricao.form-control(name="descricao" rows="3" required)
+            .mb-3
+                label(for="imagem_path") Caminho da Imagem
+                input#imagem_path.form-control(type="text" name="imagem_path" required)
+            button.btn.btn-primary.m-2.p-2(type="submit") Adicionar Feira
+
+        // Lista de feiras cadastradas
+        .row.justify-content-center.m-3
+            each feira in feiras
+                - feira = feira[0];
+                .col-md-4
+                    .card.mb-3
+                        img.card-img-top(src=feira.imagem_path, alt=feira.nome)
+                        .card-body
+                            // Formulário para editar a feira
+                            form(method="POST" action=`/admin/feiras/edit/${feira.id}`)
+                                .mb-2
+                                    label(for=`nome-${feira.id}`) Nome
+                                    input.form-control(id=`nome-${feira.id}`, type="text", name="nome", value=feira.nome, required)
+                                .mb-2
+                                    label(for=`ano-${feira.id}`) Ano
+                                    input.form-control(id=`ano-${feira.id}`, type="number", name="ano", value=feira.ano, required)
+                                .mb-2
+                                    label(for=`descricao-${feira.id}`) Descrição
+                                    textarea.form-control(id=`descricao-${feira.id}`, name="descricao", rows="3", required)= feira.descricao
+                                .mb-2
+                                    label(for=`imagem_path-${feira.id}`) Caminho da Imagem
+                                    input.form-control(id=`imagem_path-${feira.id}`, type="text", name="imagem_path", value=feira.imagem_path, required)
+                                button.btn.btn-warning.p-2.m-2(type="submit") Salvar
+                            // Formulário para deletar a feira
+                            form(method="POST" action=`/admin/feiras/delete/${feira.id}`)
+                                button.btn.btn-danger.p-2.m-2(type="submit") Excluir

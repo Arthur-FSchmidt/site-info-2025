@@ -36,4 +36,27 @@ async function getFeira(ano, nome) {
     return result.rows[0];
 }
 
-module.exports = { getFeiras, getFeira };
+// Função para adicionar uma nova feira
+async function addFeira(feira) {
+    const { nome, ano, descricao, imagem_path } = feira;
+    await db.query(
+        'INSERT INTO site.feiras (nome, ano, descricao, imagem_path) VALUES ($1, $2, $3, $4)',
+        [nome, ano, descricao, imagem_path]
+    );
+}
+
+// Função para editar uma feira existente
+async function editFeira(id, feira) {
+    const { nome, ano, descricao, imagem_path } = feira;
+    await db.query(
+        'UPDATE site.feiras SET nome = $1, ano = $2, descricao = $3, imagem_path = $4 WHERE id = $5',
+        [nome, ano, descricao, imagem_path, id]
+    );
+}
+
+// Função para deletar uma feira
+async function deleteFeira(id) {
+    await db.query('DELETE FROM site.feiras WHERE id = $1', [id]);
+}
+
+module.exports = { getFeiras, getFeira, addFeira, editFeira, deleteFeira };
