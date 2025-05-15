@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const app = express();
+const upload = require('./src/middleware/upload');
 require('dotenv').config();
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/src/views');
@@ -143,17 +144,19 @@ app.get('/admin/professores', authMiddleware, async (req, res) => {
     res.render('admin-professores', { title: "Gerenciar Professores", professores });
 });
 
-// Rota para adicionar um professor
-app.post('/admin/professores/add', authMiddleware, async (req, res) => {
-    const { nome, sobre, foto } = req.body;
+// Rota para adicionar um professor com upload de foto
+app.post('/admin/professores/add', authMiddleware, upload.single('foto'), async (req, res) => {
+    const { nome, sobre } = req.body;
+    const foto = req.file ? `/uploads/${req.file.filename}` : null; // Caminho da foto
     await professoresController.addProfessor({ nome, sobre, foto });
     res.redirect('/admin/professores');
 });
 
-// Rota para editar um professor
-app.post('/admin/professores/edit/:id', authMiddleware, async (req, res) => {
+// Rota para editar um professor com upload de foto
+app.post('/admin/professores/edit/:id', authMiddleware, upload.single('foto'), async (req, res) => {
     const id = req.params.id;
-    const { nome, sobre, foto } = req.body;
+    const { nome, sobre } = req.body;
+    const foto = req.file ? `/uploads/${req.file.filename}` : req.body.foto; // Atualiza o caminho da foto apenas se um novo arquivo for enviado
     await professoresController.editProfessor(id, { nome, sobre, foto });
     res.redirect('/admin/professores');
 });
@@ -172,16 +175,18 @@ app.get('/admin/feiras', authMiddleware, async (req, res) => {
 });
 
 // Rota para adicionar uma nova feira
-app.post('/admin/feiras/add', authMiddleware, async (req, res) => {
-    const { nome, ano, descricao, imagem_path } = req.body;
+app.post('/admin/feiras/add', authMiddleware, upload.single('imagem'), async (req, res) => {
+    const { nome, ano, descricao } = req.body;
+    const imagem_path = req.file ? `/uploads/${req.file.filename}` : null; // Caminho da imagem
     await feirasController.addFeira({ nome, ano, descricao, imagem_path });
     res.redirect('/admin/feiras');
 });
 
-// Rota para editar uma feira existente
-app.post('/admin/feiras/edit/:id', authMiddleware, async (req, res) => {
+// Rota para editar uma feira existente com upload de imagem
+app.post('/admin/feiras/edit/:id', authMiddleware, upload.single('imagem'), async (req, res) => {
     const id = req.params.id;
-    const { nome, ano, descricao, imagem_path } = req.body;
+    const { nome, ano, descricao } = req.body;
+    const imagem_path = req.file ? `/uploads/${req.file.filename}` : req.body.imagem_path; // Atualiza o caminho da imagem apenas se um novo arquivo for enviado
     await feirasController.editFeira(id, { nome, ano, descricao, imagem_path });
     res.redirect('/admin/feiras');
 });
@@ -200,21 +205,23 @@ app.get('/admin/feiras/:id/imagens', authMiddleware, async (req, res) => {
     res.render('admin-feiras-imagens', { title: "Gerenciar Imagens", feiraId, imagens });
 });
 
-// Rota para adicionar uma nova imagem
-app.post('/admin/feiras/:id/imagens/add', authMiddleware, async (req, res) => {
+// Rota para adicionar uma nova imagem adicional
+app.post('/admin/feiras/:id/imagens/add', authMiddleware, upload.single('imagem'), async (req, res) => {
     const feiraId = req.params.id;
-    const { nome, path } = req.body;
+    const { nome } = req.body;
+    const path = req.file ? `/uploads/${req.file.filename}` : null; // Caminho da imagem
     await feirasController.addImagem(feiraId, { nome, path });
     res.redirect(`/admin/feiras/${feiraId}/imagens`);
 });
 
-// Rota para editar uma imagem existente
-app.post('/admin/feiras/imagens/edit/:id', authMiddleware, async (req, res) => {
+// Rota para editar uma imagem adicional existente
+app.post('/admin/feiras/imagens/edit/:id', authMiddleware, upload.single('imagem'), async (req, res) => {
     const id = req.params.id;
-    const { nome, path } = req.body;
+    const { nome } = req.body;
+    const path = req.file ? `/uploads/${req.file.filename}` : req.body.path; // Atualiza o caminho da imagem apenas se um novo arquivo for enviado
     const feiraId = req.body.feiraId;
     await feirasController.editImagem(id, { nome, path });
-    res.redirect('/admin/feiras/' + feiraId + '/imagens');
+    res.redirect(`/admin/feiras/${feiraId}/imagens`);
 });
 
 // Rota para deletar uma imagem

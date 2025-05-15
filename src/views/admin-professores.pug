@@ -6,7 +6,7 @@ block content
             a.btn.btn-danger.m-2.p-1.align-content-center(href="/admin/dashboard") Voltar
         h1 Gerenciar Professores
         // Formulário para adicionar professor
-        form(method="POST" action="/admin/professores/add")
+        form(method="POST" action="/admin/professores/add" enctype="multipart/form-data")
             .mb-3
                 label(for="nome") Nome
                 input#nome.form-control(type="text" name="nome" required)
@@ -14,21 +14,18 @@ block content
                 label(for="sobre") Sobre
                 input#sobre.form-control(type="text" name="sobre" required)
             .mb-3
-                label(for="foto") Foto (URL)
-                input#foto.form-control(type="text" name="foto" required)
+                label(for="foto") Foto
+                input#foto.form-control(type="file" name="foto")
             button.btn.btn-primary(type="submit") Adicionar Professor
 
         // Lista de professores
         .row.justify-content-center.m-3
-            .col.col-md-10.col-lg-10
-                h2.text-center Professores Cadastrados
-        .row
             each prof in professores
                 .col.col-md-4.p-5
                     img(src=prof.foto, alt=prof.nome).img-fluid.p-3
                 .col.col-md-8.d-grid.align-content-center
                     // Formulário para editar professor
-                    form(method="POST" action=`/admin/professores/edit/${prof.id}`)
+                    form(method="POST" action=`/admin/professores/edit/${prof.id}` enctype="multipart/form-data")
                         .mb-2
                             label(for=`nome-${prof.id}`) Nome
                             input.form-control(id="nome-"+prof.id, type="text" name="nome" value=prof.nome required)
@@ -36,8 +33,10 @@ block content
                             label(for=`sobre-${prof.id}`) Sobre
                             input.form-control(id="sobre-"+prof.id, type="text" name="sobre" value=prof.sobre required)
                         .mb-2
-                            label(for=`foto-${prof.id}`) Foto (URL)
-                            input.form-control(id="foto-"+prof.id, type="text" name="foto" value=prof.foto required)
+                            label(for=`foto-${prof.id}`) Foto
+                            input.form-control(id="foto-"+prof.id, type="file" name="foto")
+                        .mb-2
+                            input(type="hidden", name="foto", value=prof.foto)
                         button.btn.btn-warning.p-2.m-2(type="submit") Salvar
                     // Formulário para excluir professor
                     form(method="POST" action=`/admin/professores/delete/${prof.id}`)

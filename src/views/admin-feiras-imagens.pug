@@ -6,13 +6,13 @@ block content
         a.btn.btn-secondary.mb-3.p-2(href="/admin/feiras") Voltar
 
         // Formulário para adicionar uma nova imagem
-        form(method="POST" action=`/admin/feiras/${feiraId}/imagens/add`)
+        form(method="POST" action=`/admin/feiras/${feiraId}/imagens/add` enctype="multipart/form-data")
             .mb-3
                 label(for="nome") Nome
                 input#nome.form-control(type="text" name="nome" required)
             .mb-3
-                label(for="path") Caminho da Imagem
-                input#path.form-control(type="text" name="path" required)
+                label(for="imagem") Imagem
+                input#imagem.form-control(type="file" name="imagem" required)
             button.btn.btn-primary(type="submit").p-2.m-2 Adicionar Imagem
 
         // Lista de imagens cadastradas
@@ -24,16 +24,18 @@ block content
                         .card-body
                             h5.card-title= imagem.nome
                             // Formulário para editar a imagem
-                            form(method="POST" action=`/admin/feiras/imagens/edit/${imagem.id}`)
-                                input(name="feiraId", value=feiraId).visually-hidden
+                            form(method="POST" action=`/admin/feiras/imagens/edit/${imagem.id}` enctype="multipart/form-data")
+                                input(name="feiraId", value=feiraId, type="hidden")
                                 .mb-2
                                     label(for=`nome-${imagem.id}`) Nome
                                     input.form-control(id=`nome-${imagem.id}`, type="text", name="nome", value=imagem.nome, required)
                                 .mb-2
-                                    label(for=`path-${imagem.id}`) Caminho da Imagem
-                                    input.form-control(id=`path-${imagem.id}`, type="text", name="path", value=imagem.path, required)
+                                    label(for=`imagem-${imagem.id}`) Imagem
+                                    input.form-control(id=`imagem-${imagem.id}`, type="file", name="imagem")
+                                .mb-2
+                                    input(type="hidden", name="path", value=imagem.path)
                                 button.btn.btn-warning.p-2.m-2(type="submit") Salvar
                             // Formulário para deletar a imagem
                             form(method="POST" action=`/admin/feiras/imagens/delete/${imagem.id}`)
-                                input(name="feiraId",value=feiraId).visually-hidden
+                                input(name="feiraId", value=feiraId, type="hidden")
                                 button.btn.btn-danger.p-2.m-2(type="submit") Excluir
