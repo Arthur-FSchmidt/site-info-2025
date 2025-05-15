@@ -2,6 +2,8 @@ extends layout
 
 block content
     .container.p-3
+        .row
+            a.btn.btn-danger.m-2.p-1.align-content-center(href="/admin/dashboard") Voltar
         h1 Gerenciar Professores
         // Formulário para adicionar professor
         form(method="POST" action="/admin/professores/add")

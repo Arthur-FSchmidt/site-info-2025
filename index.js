@@ -77,19 +77,32 @@ app.get('/curriculo', (req, res) => {
     res.render('curriculo', {title:"Currículo - Informática", diurno:curriculoController.getCurriculoDiurno(), noturno:curriculoController.getCurriculoNoturno()});
 });
 
-app.get('/feiras', (req, res) => {
-    res.render('feiras', {title:"Feiras - Informática", feiras:feirasController.getFeiras()});
+// Rota para listar todas as feiras
+app.get('/feiras', async (req, res) => {
+    try {
+        const feiras = await feirasController.getFeiras();
+        res.render('feiras', { title: "Feiras - Informática", feiras });
+    } catch (error) {
+        console.error(error);
+        res.status(500).render('500', { title: "Erro Interno - Informática" });
+    }
 });
 
-app.get('/feiras/:ano/:nome', (req, res) => {
-    const ano = req.params.ano;
-    const nome = req.params.nome;
-    const feira = feirasController.getFeira(ano, nome);
-    if (!feira) {
-        return res.status(404).render('404', {title:"Não encontrado - Informática"});
+// Rota para exibir uma feira específica
+app.get('/feiras/:ano/:nome', async (req, res) => {
+    try {
+        const { ano, nome } = req.params;
+        const feira = await feirasController.getFeira(ano, nome);
+        console.log(feira);
+        if (!feira) {
+            return res.status(404).render('404', { title: "Não encontrado - Informática" });
+        }
+        const title = `${feira.nome} ${feira.ano} - Informática`;
+        res.render('feira', { title, feira });
+    } catch (error) {
+        console.error(error);
+        res.status(500).render('500', { title: "Erro Interno - Informática" });
     }
-    let title = feira.nome + " " + feira.ano + " - Informática"; 
-    res.render('feira', {title:title, feira:feira});
 });
 
 app.get('/professores', async (req, res) => {

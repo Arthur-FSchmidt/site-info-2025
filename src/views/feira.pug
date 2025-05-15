@@ -18,14 +18,14 @@ block content
                 h4.p-2 Mais Imagens
                 each imagem in feira.imagens
                     .col-6.col-md-4.col-lg-2
-                        a(href="#imageModal-"+imagem.nome, data-bs-toggle="modal", data-bs-target="#imageModal-"+imagem.nome, data-bs-image=imagem.path)
+                        a(href="#imageModal-"+imagem.id, data-bs-toggle="modal", data-bs-target="#imageModal-"+imagem.id, data-bs-image=imagem.path)
                             img(src=imagem.path, alt="Imagem adicional").img-fluid.rounded
                     // Modal para exibir a imagem ampliada
-                    .modal.fade(id="imageModal-"+imagem.nome, tabindex="-1", aria-labelledby="imageModalLabel", aria-hidden="true")
+                    .modal.fade(id="imageModal-"+imagem.id, tabindex="-1", aria-labelledby="imageModalLabel", aria-hidden="true")
                         .modal-dialog.modal-dialog-centered
                             .modal-content
                                 .modal-body
                                     p= imagem.nome
-                                    img(id="modalImage-"+imagem.nome, src=imagem.path, alt="Imagem ampliada").img-fluid.rounded
+                                    img(id="modalImage-"+imagem.id, src=imagem.path, alt="Imagem ampliada").img-fluid.rounded
 
                                 
