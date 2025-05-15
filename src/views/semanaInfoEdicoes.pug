@@ -1,7 +1,7 @@
 extends layout 
 
 block content 
-    .container.p-3 
+    .container-fluid.p-3.px-5
         .row
             .col-12
                 a(href="/semanadainformatica").btn.btn-secondary.mb-3
@@ -28,25 +28,25 @@ block content
                         div(role="tabpanel" aria-labelledby=dia+"-tab" tabindex="0" id=dia).tab-pane.fade.active.show.justify-content-center.g-4
                             .row.justify-content-center.g-4
                                 each item in lista_dias
-                                    .col-12.w-50
-                                        .card.border-0.shadow.rounded-4.m-3.p-0   
+                                    .col-12.col-md-6
+                                        .card.border-0.shadow.rounded-4.m-3.p-0.color-info   
                                             .row
                                                 .col-12.col-lg-5.align-content-center
                                                     img(src=item.imagem_path, alt="").img-fluid.w-100.rounded-4  
                                                 .col-12.col-lg-7.d-grid.align-content-between
-                                                    h3.card-title.py-2.m-1= item.palestrante
-                                                    p.card-text.py-2.m-1= item.titulo
-                                                    h4.card-text.py-2.m-1= item.horario
+                                                    h4.card-title.py-2.pt-5.m-1.text-white= item.palestrante
+                                                    p.card-text.py-2.m-1.text-white= item.titulo
+                                                    h5.card-text.py-2.pb-5.m-1.text-white= item.horario
                     else
                         div(role="tabpanel" aria-labelledby=dia+"-tab" tabindex="0" id=dia).tab-pane.fade.justify-content-center.g-4
                             .row.justify-content-center.g-4
                                 each item in lista_dias
-                                    .col-12.w-50
-                                        .card.border-0.shadow.rounded-4.m-3.p-0   
+                                    .col-12.col-md-6
+                                        .card.border-0.shadow.rounded-4.m-3.p-0.color-info   
                                             .row
                                                 .col-12.col-lg-5.align-content-center
                                                     img(src=item.imagem_path, alt="").img-fluid.w-100.rounded-4  
                                                 .col-12.col-lg-7.d-grid.align-content-between
-                                                    h3.card-title.py-2.m-1= item.palestrante
-                                                    p.card-text.py-2.m-1= item.titulo
-                                                    h4.card-text.py-2.m-1= item.horario
+                                                    h4.card-title.py-2.pt-5.m-1.text-white= item.palestrante
+                                                    p.card-text.py-2.m-1.text-white= item.titulo
+                                                    h5.card-text.py-2.pb-5.m-1.text-white= item.horario
