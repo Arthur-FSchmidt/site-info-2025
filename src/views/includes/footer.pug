@@ -1,12 +1,9 @@
 div.container-flex.footer.p-3.color-info
     h3.m-3.ps-5.ms-5.text-white Apoio:
     div#apoiadores.d-flex.justify-content-center.flex-wrap
-        .apoiador.m-3
-        .apoiador.m-3
-        .apoiador.m-3
-        .apoiador.m-3
-        .apoiador.m-3
-        .apoiador.m-3
+        each item in apoiadores
+            div.apoiador.m-3
+                img(src=item.logo, alt=item.nome, class="img-fluid")
 div.container-flex.footer.d-flex.flex-wrap.justify-content-around.p-3.nav-footer
     div.d-grid.align-content-center
         h4.text-center.text-white.p-1 Escola Técnica Estadual Monteiro Lobato

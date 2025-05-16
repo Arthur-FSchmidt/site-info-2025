@@ -13,6 +13,7 @@ const feirasController = require('./src/controllers/feirasController');
 const curriculoController = require('./src/controllers/curriculoController');
 const homeCardsController = require('./src/controllers/homeCardsController');
 const semanaInfoController = require('./src/controllers/semanaInfoController');
+const apoioController = require('./src/controllers/apoioController');
 
 // Adicionar css e bootstrap
 app.use(express.static('public'));
@@ -32,6 +33,22 @@ app.use(session({
     saveUninitialized: false,
     cookie: { secure: false } // Use secure: true em produção com HTTPS
 }));
+
+// Envia os apoiadores para todas as rotas
+app.use((req, res, next) => {
+    let apoiadores;
+
+    try {
+        apoiadores = apoioController.getApoiadores();
+    } catch (error) {
+        console.error('Erro ao obter apoiadores:', error);
+        apoiadores = [];
+    }
+    
+    res.locals.apoiadores = apoiadores;
+
+    next();
+});
 
 // Configurar CORS
 const corsOptions = {

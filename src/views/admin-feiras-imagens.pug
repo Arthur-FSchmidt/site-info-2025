@@ -12,7 +12,7 @@ block content
                 input#nome.form-control(type="text" name="nome" required)
             .mb-3
                 label(for="imagem") Imagem
-                input#imagem.form-control(type="file" name="imagem" required)
+                input#imagem.form-control(type="file" name="imagem", accept="image/*" required)
             button.btn.btn-primary(type="submit").p-2.m-2 Adicionar Imagem
 
         // Lista de imagens cadastradas
@@ -33,7 +33,7 @@ block content
                                     label(for=`imagem-${imagem.id}`) Imagem
                                     input.form-control(id=`imagem-${imagem.id}`, type="file", name="imagem")
                                 .mb-2
-                                    input(type="hidden", name="path", value=imagem.path)
+                                    input(type="hidden", name="path", value=imagem.path, accept="image/*")
                                 button.btn.btn-warning.p-2.m-2(type="submit") Salvar
                             // Formulário para deletar a imagem
                             form(method="POST" action=`/admin/feiras/imagens/delete/${imagem.id}`)

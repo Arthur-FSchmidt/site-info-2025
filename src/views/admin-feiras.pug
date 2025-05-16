@@ -18,7 +18,7 @@ block content
                 textarea#descricao.form-control(name="descricao" rows="3" required)
             .mb-3
                 label(for="imagem") Imagem
-                input#imagem.form-control(type="file" name="imagem")
+                input#imagem.form-control(type="file" name="imagem", accept="image/*")
             button.btn.btn-primary.m-2.p-2(type="submit") Adicionar Feira
 
         // Lista de feiras cadastradas
@@ -42,7 +42,7 @@ block content
                                     textarea.form-control(id=`descricao-${feira.id}`, name="descricao", rows="3", required)= feira.descricao
                                 .mb-3
                                     label(for=`imagem-${feira.id}`) Imagem
-                                    input.form-control(id=`imagem-${feira.id}`, type="file", name="imagem")
+                                    input.form-control(id=`imagem-${feira.id}`, type="file", name="imagem", accept="image/*")
                                 .mb-3
                                     input(type="hidden", name="imagem_path", value=feira.imagem_path)
                                 button.btn.btn-warning.p-2.m-2.w-100(type="submit") Salvar

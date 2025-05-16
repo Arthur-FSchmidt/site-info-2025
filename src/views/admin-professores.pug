@@ -15,7 +15,7 @@ block content
                 input#sobre.form-control(type="text" name="sobre" required)
             .mb-3
                 label(for="foto") Foto
-                input#foto.form-control(type="file" name="foto")
+                input#foto.form-control(type="file" name="foto", accept="image/*")
             button.btn.btn-primary(type="submit") Adicionar Professor
 
         // Lista de professores
@@ -34,7 +34,7 @@ block content
                             input.form-control(id="sobre-"+prof.id, type="text" name="sobre" value=prof.sobre required)
                         .mb-2
                             label(for=`foto-${prof.id}`) Foto
-                            input.form-control(id="foto-"+prof.id, type="file" name="foto")
+                            input.form-control(id="foto-"+prof.id, type="file" name="foto", accept="image/*")
                         .mb-2
                             input(type="hidden", name="foto", value=prof.foto)
                         button.btn.btn-warning.p-2.m-2(type="submit") Salvar
