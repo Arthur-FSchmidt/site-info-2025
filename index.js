@@ -35,11 +35,11 @@ app.use(session({
 }));
 
 // Envia os apoiadores para todas as rotas
-app.use((req, res, next) => {
+app.use( async (req, res, next) => {
     let apoiadores;
 
     try {
-        apoiadores = apoioController.getApoiadores();
+        apoiadores = await apoioController.getApoiadores();
     } catch (error) {
         console.error('Erro ao obter apoiadores:', error);
         apoiadores = [];
@@ -247,6 +247,36 @@ app.post('/admin/feiras/imagens/delete/:id', authMiddleware, async (req, res) =>
     const feiraId = req.body.feiraId;
     await feirasController.deleteImagem(id);
     res.redirect('/admin/feiras/' + feiraId + '/imagens');
+});
+
+// Rota para listar apoiadores no painel administrativo
+app.get('/admin/apoiadores', authMiddleware, async (req, res) => {
+    const apoiadores = await apoioController.getApoiadores();
+    res.render('admin-apoiadores', { title: "Gerenciar Apoiadores", apoiadores });
+});
+
+// Rota para adicionar um novo apoiador
+app.post('/admin/apoiadores/add', authMiddleware, upload.single('logo'), async (req, res) => {
+    const { nome } = req.body;
+    const logo_path = req.file ? `/uploads/${req.file.filename}` : null; // Caminho do logo
+    await apoioController.addApoiador({ nome, logo_path });
+    res.redirect('/admin/apoiadores');
+});
+
+// Rota para editar um apoiador existente
+app.post('/admin/apoiadores/edit/:id', authMiddleware, upload.single('logo'), async (req, res) => {
+    const id = req.params.id;
+    const { nome } = req.body;
+    const logo_path = req.file ? `/uploads/${req.file.filename}` : req.body.logo_path; // Atualiza o caminho do logo apenas se um novo arquivo for enviado
+    await apoioController.editApoiador(id, { nome, logo_path });
+    res.redirect('/admin/apoiadores');
+});
+
+// Rota para deletar um apoiador
+app.post('/admin/apoiadores/delete/:id', authMiddleware, async (req, res) => {
+    const id = req.params.id;
+    await apoioController.deleteApoiador(id);
+    res.redirect('/admin/apoiadores');
 });
 
 // Rota para logout

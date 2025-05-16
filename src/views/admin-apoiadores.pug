@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    .container.p-3
+        h1 Gerenciar Apoiadores
+        a.btn.btn-secondary.mb-3(href="/admin/dashboard") Voltar
+
+        // Formulário para adicionar um novo apoiador
+        form(method="POST" action="/admin/apoiadores/add" enctype="multipart/form-data")
+            .mb-3
+                label(for="nome") Nome
+                input#nome.form-control(type="text" name="nome" required)
+            .mb-3
+                label(for="logo") Logo
+                input#logo.form-control(type="file" name="logo" required)
+            button.btn.btn-primary(type="submit") Adicionar Apoiador
+
+        // Lista de apoiadores cadastrados
+        .row.justify-content-center.m-3
+            each apoiador in apoiadores
+                .col-md-4
+                    .card.mb-3
+                        img.card-img-top(src=apoiador.logo_path, alt=apoiador.nome)
+                        .card-body
+                            h5.card-title= apoiador.nome
+                            // Formulário para editar o apoiador
+                            form(method="POST" action=`/admin/apoiadores/edit/${apoiador.id}` enctype="multipart/form-data")
+                                .mb-2
+                                    label(for=`nome-${apoiador.id}`) Nome
+                                    input.form-control(id=`nome-${apoiador.id}`, type="text", name="nome", value=apoiador.nome, required)
+                                .mb-2
+                                    label(for=`logo-${apoiador.id}`) Logo
+                                    input.form-control(id=`logo-${apoiador.id}`, type="file", name="logo")
+                                .mb-2
+                                    input(type="hidden", name="logo_path", value=apoiador.logo_path) 
+                                button.btn.btn-warning(type="submit") Salvar
+                            // Formulário para deletar o apoiador
+                            form(method="POST" action=`/admin/apoiadores/delete/${apoiador.id}`)
+                                button.btn.btn-danger(type="submit") Excluir
